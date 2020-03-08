@@ -3,29 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package views;
 
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 import javax.swing.Timer;
 
 /**
- *
- * @author Ramon Decena
- */
+     * PROYECTO 2 
+     * SISTEMAS OPERATIVOS
+     * DIANA DECENA Y JOSE ALGUINDIGUE 
+ **/
 public class VentanaPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaPrincipal
-     */
+    private int cont = 3;
+    
     public VentanaPrincipal() {
         initComponents();
-        this.setResizable(false);
         this.setLocationRelativeTo(null);
         start.setVisible(false);
+        contador.setVisible(false);
         
-        Timer timer = new Timer(5000, (ActionEvent ae) -> { 
+        Timer timer = new Timer(1000, (ActionEvent ae) -> { 
             proyecto.setVisible(false);
             start.setVisible(true);
+            contador.setVisible(true);
+            if(cont == 2){
+                contador.setIcon(new ImageIcon(getClass().getResource("2.png")));
+            }
+            if(cont == 1){
+                contador.setIcon(new ImageIcon(getClass().getResource("1.png")));
+            }
+            if(cont == 0){
+                this.setVisible(false);
+                ColasUI ui = new ColasUI();
+                ui.setVisible(true);
+            }
+            cont--;
         });
         timer.start();
     }
@@ -39,6 +53,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        contador = new javax.swing.JLabel();
         start = new javax.swing.JLabel();
         proyecto = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -59,13 +74,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/start2.png"))); // NOI18N
-        jPanel1.add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
+        contador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/3.png"))); // NOI18N
+        jPanel1.add(contador, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 390, -1, -1));
 
-        proyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/proyecto1.png"))); // NOI18N
+        start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/text1.png"))); // NOI18N
+        jPanel1.add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, -1, -1));
+
+        proyecto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/proyecto1.png"))); // NOI18N
         jPanel1.add(proyecto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, -1, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/cool-bg-2.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/cool-bg-2.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -109,6 +127,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel contador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
