@@ -18,13 +18,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private int cont = 3;
     
+    
     public VentanaPrincipal() {
         initComponents();
         this.setLocationRelativeTo(null);
         start.setVisible(false);
         contador.setVisible(false);
         
-        Timer timer = new Timer(1000, (ActionEvent ae) -> { 
+        
+        Timer timer = new Timer(2000, (ActionEvent ae) -> { 
             proyecto.setVisible(false);
             start.setVisible(true);
             contador.setVisible(true);

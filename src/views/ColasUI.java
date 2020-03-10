@@ -5,18 +5,20 @@
  */
 package views;
 
+import controllers.Simulacion;
+
 /**
  *
  * @author Ramon Decena
  */
 public class ColasUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ColasUI
-     */
+    private Simulacion simulacion;
+    
     public ColasUI() {
         initComponents();
         this.setLocationRelativeTo(null);
+        simulacion = new Simulacion();
     }
 
     /**
