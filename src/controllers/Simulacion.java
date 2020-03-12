@@ -77,6 +77,14 @@ public class Simulacion {
     public Queue<Carro> getColaNivel3() {
         return nivel3;
     }
+
+    public Queue<Carro> getCarrosEsperando() {
+        return carrosEsperando;
+    }
+
+    public void setColaEsperando(Carro carro) {
+        carrosEsperando.add(carro);
+    }
     
     public void setColaNivel2(Carro carro) {
         nivel2.add(carro);
