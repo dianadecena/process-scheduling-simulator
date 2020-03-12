@@ -74,7 +74,7 @@ public class Administrador {
         
         }
         if(carro.getEstado()==0){
-            System.out.println("Halgo malo paso");
+            System.out.println("Algo malo paso");
         }
         
     }
