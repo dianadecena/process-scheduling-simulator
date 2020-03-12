@@ -1,6 +1,8 @@
 
 package models;
 
+import controllers.Simulacion;
+
 public class Carro {
     
     private int id;
@@ -8,9 +10,8 @@ public class Carro {
     private int cont = 0;
     private int estado=0;
 
-    public Carro(int id) {
-        this.id = id;
-        System.out.println(this.id);
+    public Carro() {
+        this.id = Simulacion.id++;
         this.nivel = (int)(Math.random()*(3-1+1)+1);
     }
 

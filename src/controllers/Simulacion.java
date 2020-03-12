@@ -22,34 +22,32 @@ public class Simulacion {
     public Queue<Carro> nivel1;
     public Queue<Carro> nivel2;
     public Queue<Carro> nivel3;
-    private int id = 1;
+    public static int id = 1;
     
     public Simulacion(){
         this.inicializar();
-        admin.actualizarColaListos(carrosListos, nivel1, nivel2, nivel3);
-       /* System.out.print("\nListos:");
+        /*System.out.print("\nListos:");
         imprimirCola(carrosListos);
         System.out.print("\nN1:");
         imprimirCola(nivel1);
         System.out.print("\nN2:");
         imprimirCola(nivel2);
         System.out.print("\nN3:");
-        imprimirCola(nivel3);
-        admin.reencolar(mecanico.revisarCarro(admin.enviarCarro(carrosListos, nivel1, nivel2, nivel3)));*/
+        imprimirCola(nivel3);*/
         
     }
     
     public void inicializar(){
         mecanico = new Mecanico();
-        carro1 = new Carro(id++);
+        carro1 = new Carro();
         //System.out.println(carro1.getNivel());
-        carro2 = new Carro(id++);
+        carro2 = new Carro();
         //System.out.println(carro2.getNivel());
-        carro3 = new Carro(id++);
+        carro3 = new Carro();
+        carro4 = new Carro();
+        carro5 = new Carro();
+        carro6 = new Carro();
         //System.out.println(carro3.getNivel());
-        carro4 = new Carro(id++);
-        carro5 = new Carro(id++);
-        carro6 = new Carro(id++);
         admin = new Administrador();
         carrosEsperando = new LinkedList<>(); 
         carrosListos = new LinkedList<>();
@@ -62,7 +60,6 @@ public class Simulacion {
         this.agregarCarroACola(carro4);
         this.agregarCarroACola(carro5);
         this.agregarCarroACola(carro6);
-        
     }
 
     public void setColaNivel1(Carro carro) {
@@ -125,6 +122,21 @@ public class Simulacion {
                 }
         }
         System.out.print("]");
+    }
+    
+    public void iniciarSimulacion() throws InterruptedException{
+        Thread.sleep(5000);
+        admin.reencolarListos(mecanico.revisarCarro(admin.enviarCarroListo(nivel1, nivel2, nivel3), nivel1,nivel2,nivel3), nivel1,nivel2,nivel3,carrosEsperando);
+        
+        
+       /* if(!(carrosEsperando.isEmpty())) {
+            Thread.sleep(1000);
+            admin.reencolarEspera(mecanico.sacarCarroEspera(admin.enviarCarroEspera(carrosEsperando)), nivel1, nivel2, nivel3, nivel1);
+        }
+       if(Mecanico.carrosRevisados == 2){
+           Thread.sleep(2000);
+           admin.crearCarro();
+       }*/
     }
     
 }

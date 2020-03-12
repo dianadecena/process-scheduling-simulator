@@ -3,34 +3,94 @@ package views;
 
 import controllers.Simulacion;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Timer;
-import models.Carro;
+import models.*;
+
 
 public class ColasUI extends javax.swing.JFrame {
 
     private Simulacion simulacion;
     private int cont1, cont2, cont3;
+    public static boolean actualizarNivel1 = false;
+    public static boolean actualizarNivel2 = false;
+    public static boolean actualizarNivel3 = false;
+    public static int idRevision;
 
     public ColasUI() {
         initComponents();
         this.setLocationRelativeTo(null);
         simulacion = new Simulacion();
+        
+        //NIVEL 1
         nivel11.setVisible(false);
         nivel12.setVisible(false);
         nivel13.setVisible(false);
         nivel14.setVisible(false);
+        
+        //NIVEL 2 
         nivel21.setVisible(false);
         nivel22.setVisible(false);
         nivel23.setVisible(false);
+        
+        //NIVEL 3
         nivel31.setVisible(false);
         nivel32.setVisible(false);
         nivel33.setVisible(false);
+        
+        //contadores iniciales de cada nivel 
         cont1 = simulacion.getColaNivel1().size();
         cont2 = simulacion.getColaNivel2().size();
         cont3 = simulacion.getColaNivel3().size();
         
+        this.encolarCarrosNivel1();
+        this.encolarCarrosNivel2();
+        this.encolarCarrosNivel3();
+            
         Timer timer = new Timer(1, (ActionEvent ae) -> { 
-            if(!(simulacion.getColaNivel1().isEmpty())){
+            ID.setText(Integer.toString(idRevision));
+            if(actualizarNivel1){
+                System.out.println("actualizando nivel 1");
+                cont1 = simulacion.getColaNivel1().size();
+                nivel11.setVisible(false);
+                nivel12.setVisible(false);
+                nivel13.setVisible(false);
+                nivel14.setVisible(false);
+                this.encolarCarrosNivel1();
+            }
+            if(actualizarNivel2){
+                System.out.println("actualizando nivel 2");
+                cont2 = simulacion.getColaNivel2().size();
+                nivel21.setVisible(false);
+                nivel22.setVisible(false);
+                nivel23.setVisible(false);
+                this.encolarCarrosNivel2();
+            }
+            if(actualizarNivel3){
+                System.out.println("actualizando nivel 3");
+                cont3 = simulacion.getColaNivel3().size();
+                nivel31.setVisible(false);
+                nivel32.setVisible(false);
+                nivel33.setVisible(false);
+                this.encolarCarrosNivel3();
+            }
+        });
+        
+        Timer timer2 = new Timer(1000, (ActionEvent ae) -> { 
+            try {
+                simulacion.iniciarSimulacion();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ColasUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
+        timer.start();
+        timer2.start();
+    }
+    
+    public void encolarCarrosNivel1(){
+          if(!(simulacion.getColaNivel1().isEmpty())){
                 if(cont1==simulacion.getColaNivel1().size()){
                         System.out.println("entro");
                         System.out.println(cont1);
@@ -67,9 +127,12 @@ public class ColasUI extends javax.swing.JFrame {
                         simulacion.setColaNivel1(carroAux);
                         cont1--;
                 } 
-        }    
-            
-            if(!(simulacion.getColaNivel2().isEmpty())){
+        } 
+    actualizarNivel1 = false;
+    }
+    
+    public void encolarCarrosNivel2(){
+        if(!(simulacion.getColaNivel2().isEmpty())){
                 if(cont2==simulacion.getColaNivel2().size()){
                         System.out.println("entro");
                         System.out.println(cont2);
@@ -100,8 +163,10 @@ public class ColasUI extends javax.swing.JFrame {
                         cont2--;
                 }     
         }  
-            
-            if(!(simulacion.getColaNivel3().isEmpty())){
+    }
+    
+    public void encolarCarrosNivel3(){
+           if(!(simulacion.getColaNivel3().isEmpty())){
                 if(cont3==simulacion.getColaNivel3().size()){
                         System.out.println("entro");
                         System.out.println(cont3);
@@ -131,9 +196,7 @@ public class ColasUI extends javax.swing.JFrame {
                         simulacion.setColaNivel3(carroAux);
                         cont3--;
                 }     
-        }  
-        });
-        timer.start();
+        } 
     }
 
     /**
@@ -163,6 +226,7 @@ public class ColasUI extends javax.swing.JFrame {
         nivel32 = new javax.swing.JLabel();
         elem33 = new javax.swing.JLabel();
         nivel33 = new javax.swing.JLabel();
+        ID = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -252,6 +316,11 @@ public class ColasUI extends javax.swing.JFrame {
         nivel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/nivel3.png"))); // NOI18N
         getContentPane().add(nivel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(546, 343, -1, -1));
 
+        ID.setFont(new java.awt.Font("Consolas", 1, 36)); // NOI18N
+        ID.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(ID, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 520, -1, -1));
+
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/colas-bg.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -294,6 +363,7 @@ public class ColasUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ID;
     private javax.swing.JLabel elem11;
     private javax.swing.JLabel elem12;
     private javax.swing.JLabel elem13;
