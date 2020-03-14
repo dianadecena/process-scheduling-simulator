@@ -13,9 +13,9 @@ public class Mecanico {
     }
     
     
-    public Carro revisarCarro(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3){
+    public Carro revisarCarro(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3) throws InterruptedException{
         if(carro != null){
-            ColasUI.idRevision = carro.getId();
+            System.out.println("entro carro");
             random = (int)(Math.random()*(10-1+1)+1);
             sumaCont(carro, nivel1, nivel2, nivel3);
             carro.setCont(0);
@@ -38,7 +38,7 @@ public class Mecanico {
                     return carro;
                 }
         }
-    return carro;
+    return null;
     }
     
     public Carro sacarCarroEspera(Carro carro){
@@ -50,7 +50,7 @@ public class Mecanico {
             carrosRevisados++;
             return carro;
         } else {
-            return carro;
+            return null;
         }
     }
     

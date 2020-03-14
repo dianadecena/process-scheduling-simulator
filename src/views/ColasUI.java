@@ -17,7 +17,7 @@ public class ColasUI extends javax.swing.JFrame {
     public static boolean actualizarNivel2 = false;
     public static boolean actualizarNivel3 = false;
     public static boolean actualizarEsperando = false;
-    public static int idRevision;
+    public static int idRevision = 0;
 
     public ColasUI() {
         initComponents();
@@ -46,20 +46,20 @@ public class ColasUI extends javax.swing.JFrame {
         e4.setVisible(false);
         
         //contadores iniciales de cada nivel 
-        cont1 = simulacion.getColaNivel1().size();
-        cont2 = simulacion.getColaNivel2().size();
-        cont3 = simulacion.getColaNivel3().size();
-        cont4 = simulacion.getCarrosEsperando().size();
+        cont1 = simulacion.getAdmin().getNivel1().size();
+        cont2 = simulacion.getAdmin().getNivel2().size();
+        cont3 = simulacion.getAdmin().getNivel3().size();
+        cont4 = simulacion.getAdmin().getCarrosEsperando().size();
         
         this.encolarCarrosNivel1();
         this.encolarCarrosNivel2();
         this.encolarCarrosNivel3();
             
-        Timer timer = new Timer(1, (ActionEvent ae) -> { 
+        Timer timer = new Timer(2000, (ActionEvent ae) -> { 
             ID.setText(Integer.toString(idRevision));
             if(actualizarNivel1){
                 System.out.println("actualizando nivel 1");
-                cont1 = simulacion.getColaNivel1().size();
+                cont1 = simulacion.getAdmin().getNivel1().size();
                 nivel11.setVisible(false);
                 nivel12.setVisible(false);
                 nivel13.setVisible(false);
@@ -68,7 +68,7 @@ public class ColasUI extends javax.swing.JFrame {
             }
             if(actualizarNivel2){
                 System.out.println("actualizando nivel 2");
-                cont2 = simulacion.getColaNivel2().size();
+                cont2 = simulacion.getAdmin().getNivel2().size();
                 nivel21.setVisible(false);
                 nivel22.setVisible(false);
                 nivel23.setVisible(false);
@@ -76,7 +76,7 @@ public class ColasUI extends javax.swing.JFrame {
             }
             if(actualizarNivel3){
                 System.out.println("actualizando nivel 3");
-                cont3 = simulacion.getColaNivel3().size();
+                cont3 = simulacion.getAdmin().getNivel3().size();
                 nivel31.setVisible(false);
                 nivel32.setVisible(false);
                 nivel33.setVisible(false);
@@ -84,7 +84,7 @@ public class ColasUI extends javax.swing.JFrame {
             }
             if(actualizarEsperando){
                 System.out.println("actualizando esperando");
-                cont4 = simulacion.getCarrosEsperando().size();
+                cont4 = simulacion.getAdmin().getCarrosEsperando().size();
                 e1.setVisible(false);
                 e2.setVisible(false);
                 e3.setVisible(false);
@@ -106,45 +106,37 @@ public class ColasUI extends javax.swing.JFrame {
     }
     
     public void encolarCarrosNivel1(){
-          if(!(simulacion.getColaNivel1().isEmpty())){
-                if(cont1==simulacion.getColaNivel1().size()){
-                        System.out.println("entro");
-                        System.out.println(cont1);
-                        Carro carroAux = (Carro) simulacion.getColaNivel1().poll();
+          if(!(simulacion.getAdmin().getNivel1().isEmpty())){
+                if(cont1==simulacion.getAdmin().getNivel1().size()){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel1().poll();
                         if(carroAux != null){
                             nivel11.setVisible(true);
                             elem11.setText(Integer.toString(carroAux.getId()));
-                            simulacion.setColaNivel1(carroAux);
+                            simulacion.getAdmin().setNivel1(carroAux);
                             cont1--;
                         }
-                        System.out.println(cont1);
-                        System.out.println(simulacion.getColaNivel1().size());
                 }
-                if((cont1==simulacion.getColaNivel1().size()-1) && cont1 > 0){
-                        System.out.println("entro 2");
-                        System.out.println(cont1);
-                        Carro carroAux = (Carro) simulacion.getColaNivel1().poll();
+                if((cont1==simulacion.getAdmin().getNivel1().size()-1) && cont1 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel1().poll();
                         if(carroAux != null){
                             nivel12.setVisible(true);
                             elem12.setText(Integer.toString(carroAux.getId()));
-                            simulacion.setColaNivel1(carroAux);
+                            simulacion.getAdmin().setNivel1(carroAux);
                             cont1--;
                         }
-                        System.out.println(cont1);
-                        System.out.println(simulacion.getColaNivel1().size());
                 }
-                if((cont1==simulacion.getColaNivel1().size()-2) && cont1 > 0){
-                        Carro carroAux = (Carro) simulacion.getColaNivel1().poll();
+                if((cont1==simulacion.getAdmin().getNivel1().size()-2) && cont1 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel1().poll();
                         nivel13.setVisible(true);
                         elem13.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel1(carroAux);
+                        simulacion.getAdmin().setNivel1(carroAux);
                         cont1--;
                 } 
-                if((cont1==simulacion.getColaNivel1().size()-3) && cont1 > 0){
-                        Carro carroAux = (Carro) simulacion.getColaNivel1().poll();
+                if((cont1==simulacion.getAdmin().getNivel1().size()-3) && cont1 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel1().poll();
                         nivel14.setVisible(true);
                         elem14.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel1(carroAux);
+                        simulacion.getAdmin().setNivel1(carroAux);
                         cont1--;
                 } 
         } 
@@ -152,38 +144,30 @@ public class ColasUI extends javax.swing.JFrame {
     }
     
     public void encolarCarrosNivel2(){
-        if(!(simulacion.getColaNivel2().isEmpty())){
-                if(cont2==simulacion.getColaNivel2().size()){
-                        System.out.println("entro");
-                        System.out.println(cont2);
-                        Carro carroAux = (Carro) simulacion.getColaNivel2().poll();
+        if(!(simulacion.getAdmin().getNivel2().isEmpty())){
+                if(cont2==simulacion.getAdmin().getNivel2().size()){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel2().poll();
                         if(carroAux != null){
                             nivel21.setVisible(true);
                             elem21.setText(Integer.toString(carroAux.getId()));
-                            simulacion.setColaNivel2(carroAux);
+                            simulacion.getAdmin().setNivel2(carroAux);
                             cont2--;
                         }
-                        System.out.println(cont2);
-                        System.out.println(simulacion.getColaNivel2().size());
                 }
-                if((cont2==simulacion.getColaNivel2().size()-1) && cont2 > 0){
-                        System.out.println("entro 2");
-                        System.out.println(cont2);
-                        Carro carroAux = (Carro) simulacion.getColaNivel2().poll();
+                if((cont2==simulacion.getAdmin().getNivel2().size()-1) && cont2 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel2().poll();
                         if(carroAux != null){
                             nivel22.setVisible(true);
                             elem22.setText(Integer.toString(carroAux.getId()));
-                            simulacion.setColaNivel2(carroAux);
+                            simulacion.getAdmin().setNivel2(carroAux);
                             cont2--;
                         }
-                        System.out.println(cont2);
-                        System.out.println(simulacion.getColaNivel2().size());
                 }
-                if((cont2==simulacion.getColaNivel2().size()-2) && cont2 > 0){
-                        Carro carroAux = (Carro) simulacion.getColaNivel2().poll();
+                if((cont2==simulacion.getAdmin().getNivel2().size()-2) && cont2 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel2().poll();
                         nivel23.setVisible(true);
                         elem23.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel2(carroAux);
+                        simulacion.getAdmin().setNivel2(carroAux);
                         cont2--;
                 }     
         }  
@@ -191,38 +175,30 @@ public class ColasUI extends javax.swing.JFrame {
     }
     
     public void encolarCarrosNivel3(){
-           if(!(simulacion.getColaNivel3().isEmpty())){
-                if(cont3==simulacion.getColaNivel3().size()){
-                        System.out.println("entro");
-                        System.out.println(cont3);
-                        Carro carroAux = (Carro) simulacion.getColaNivel3().poll();
+           if(!(simulacion.getAdmin().getNivel3().isEmpty())){
+                if(cont3==simulacion.getAdmin().getNivel3().size()){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel3().poll();
                         if(carroAux != null){
                             nivel31.setVisible(true);
                             elem31.setText(Integer.toString(carroAux.getId()));
-                            simulacion.setColaNivel3(carroAux);
+                            simulacion.getAdmin().setNivel3(carroAux);
                             cont3--;
                         }
-                        System.out.println(cont3);
-                        System.out.println(simulacion.getColaNivel3().size());
                 }
-                if((cont3==simulacion.getColaNivel3().size()-1) && cont3 > 0){
-                        System.out.println("entro 2");
-                        System.out.println(cont3);
-                        Carro carroAux = (Carro) simulacion.getColaNivel3().poll();
+                if((cont3==simulacion.getAdmin().getNivel3().size()-1) && cont3 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel3().poll();
                         if(carroAux != null){
                             nivel32.setVisible(true);
                             elem32.setText(Integer.toString(carroAux.getId()));
-                            simulacion.setColaNivel3(carroAux);
+                            simulacion.getAdmin().setNivel3(carroAux);
                             cont3--;
                         }
-                        System.out.println(cont3);
-                        System.out.println(simulacion.getColaNivel3().size());
                 }
-                if((cont3==simulacion.getColaNivel3().size()-2) && cont3 > 0){
-                        Carro carroAux = (Carro) simulacion.getColaNivel3().poll();
+                if((cont3==simulacion.getAdmin().getNivel3().size()-2) && cont3 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getNivel3().poll();
                         nivel33.setVisible(true);
                         elem33.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel3(carroAux);
+                        simulacion.getAdmin().setNivel3(carroAux);
                         cont3--;
                 }     
         } 
@@ -230,33 +206,33 @@ public class ColasUI extends javax.swing.JFrame {
     }
     
     public void encolarCarrosEsperando(){
-          if(!(simulacion.getCarrosEsperando().isEmpty())){
-                if(cont4==simulacion.getCarrosEsperando().size()){
-                        Carro carroAux = (Carro) simulacion.getCarrosEsperando().poll();
+          if(!(simulacion.getAdmin().getCarrosEsperando().isEmpty())){
+                if(cont4==simulacion.getAdmin().getCarrosEsperando().size()){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getCarrosEsperando().poll();
                         e1.setVisible(true);
                         elem41.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaEsperando(carroAux);
+                        simulacion.getAdmin().setCarrosEsperando(carroAux);
                         cont4--;
                 }
-                if((cont4==simulacion.getCarrosEsperando().size()-1) && cont4 > 0){
-                        Carro carroAux = (Carro) simulacion.getCarrosEsperando().poll();
+                if((cont4==simulacion.getAdmin().getCarrosEsperando().size()-1) && cont4 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getCarrosEsperando().poll();
                         e2.setVisible(true);
                         elem42.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaEsperando(carroAux);
+                        simulacion.getAdmin().setCarrosEsperando(carroAux);
                         cont4--;
                 }
-                if((cont4==simulacion.getCarrosEsperando().size()-2) && cont4 > 0){
-                        Carro carroAux = (Carro) simulacion.getCarrosEsperando().poll();
+                if((cont4==simulacion.getAdmin().getCarrosEsperando().size()-2) && cont4 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getCarrosEsperando().poll();
                         e3.setVisible(true);
                         elem43.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaEsperando(carroAux);
+                        simulacion.getAdmin().setCarrosEsperando(carroAux);
                         cont4--;
                 } 
-                if((cont4==simulacion.getCarrosEsperando().size()-3) && cont4 > 0){
-                        Carro carroAux = (Carro) simulacion.getCarrosEsperando().poll();
+                if((cont4==simulacion.getAdmin().getCarrosEsperando().size()-3) && cont4 > 0){
+                        Carro carroAux = (Carro) simulacion.getAdmin().getCarrosEsperando().poll();
                         e4.setVisible(true);
                         elem44.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaEsperando(carroAux);
+                        simulacion.getAdmin().setCarrosEsperando(carroAux);
                         cont4--;
                 } 
         } 
@@ -306,7 +282,8 @@ public class ColasUI extends javax.swing.JFrame {
 
         elem11.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem11.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(elem11, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 209, 20, 30));
+        elem11.setText("11");
+        getContentPane().add(elem11, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 209, -1, 30));
 
         nivel11.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         nivel11.setForeground(new java.awt.Color(0, 0, 0));
@@ -317,13 +294,15 @@ public class ColasUI extends javax.swing.JFrame {
 
         elem12.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem12.setForeground(new java.awt.Color(0, 0, 0));
-        getContentPane().add(elem12, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 209, 40, 30));
+        elem12.setText("2");
+        getContentPane().add(elem12, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 209, 50, 30));
 
         nivel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/nivel1.png"))); // NOI18N
         getContentPane().add(nivel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(591, 181, -1, -1));
 
         elem13.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem13.setForeground(new java.awt.Color(0, 0, 0));
+        elem13.setText("13");
         getContentPane().add(elem13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 209, -1, -1));
 
         nivel13.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
@@ -334,6 +313,7 @@ public class ColasUI extends javax.swing.JFrame {
 
         elem14.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem14.setForeground(new java.awt.Color(0, 0, 0));
+        elem14.setText("14");
         getContentPane().add(elem14, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 209, -1, -1));
 
         nivel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/nivel1.png"))); // NOI18N
@@ -362,8 +342,8 @@ public class ColasUI extends javax.swing.JFrame {
 
         elem31.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem31.setForeground(new java.awt.Color(0, 0, 0));
-        elem31.setText("1");
-        getContentPane().add(elem31, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 370, 20, -1));
+        elem31.setText("11");
+        getContentPane().add(elem31, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 370, 30, -1));
 
         nivel31.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         nivel31.setForeground(new java.awt.Color(0, 0, 0));
@@ -374,7 +354,7 @@ public class ColasUI extends javax.swing.JFrame {
 
         elem32.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem32.setForeground(new java.awt.Color(0, 0, 0));
-        elem32.setText("2");
+        elem32.setText("12");
         getContentPane().add(elem32, new org.netbeans.lib.awtextra.AbsoluteConstraints(625, 370, -1, -1));
 
         nivel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/nivel3.png"))); // NOI18N
@@ -382,7 +362,7 @@ public class ColasUI extends javax.swing.JFrame {
 
         elem33.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
         elem33.setForeground(new java.awt.Color(0, 0, 0));
-        elem33.setText("3");
+        elem33.setText("13");
         getContentPane().add(elem33, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 370, -1, -1));
 
         nivel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/nivel3.png"))); // NOI18N
