@@ -14,42 +14,44 @@ public class Mecanico {
     
     
     public Carro revisarCarro(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3){
-        ColasUI.idRevision = carro.getId();
-        random = (int)(Math.random()*(10-1+1)+1);
-        sumaCont(carro, nivel1, nivel2, nivel3);
-        carro.setCont(0);
-        if(random <= 3){
-            System.out.println("Está botado el carro de id " +carro.getId());
-            carrosRevisados++;
-            carro.setEstado(1);
-            return carro;
-        }
-        if(random > 3 && random <= 5){
-            System.out.println("Le toca esperar al carro de id " +carro.getId());
-            carro.setEstado(2);
-            carrosRevisados++;
-            return carro;
-        }
-        if(random > 5){
-            System.out.println("Vuelve a la cola el carro de id " +carro.getId());
-            carro.setEstado(3);
-            carrosRevisados++;
-            return carro;
+        if(carro != null){
+            ColasUI.idRevision = carro.getId();
+            random = (int)(Math.random()*(10-1+1)+1);
+            sumaCont(carro, nivel1, nivel2, nivel3);
+            carro.setCont(0);
+                if(random <= 3){
+                    System.out.println("Está botado el carro de id " +carro.getId());
+                    carrosRevisados++;
+                    carro.setEstado(1);
+                    return carro;
+                }
+                if(random > 3 && random <= 5){
+                    System.out.println("Le toca esperar al carro de id " +carro.getId());
+                    carrosRevisados++;
+                    carro.setEstado(2);
+                    return carro;
+                }
+                if(random > 5){
+                    System.out.println("Vuelve a la cola el carro de id " +carro.getId());
+                    carrosRevisados++;
+                    carro.setEstado(3);
+                    return carro;
+                }
         }
     return carro;
     }
     
     public Carro sacarCarroEspera(Carro carro){
-    random = (int)(Math.random()*(10-1+1)+1);
+        random = (int)(Math.random()*(10-1+1)+1);
     
-    if (random <=6){
-        carro.setEstado(4);
-        carrosRevisados++;
-        return carro;
-    }
-    else {
-        return carro;
-    }
+        if(random <=6){
+            ColasUI.actualizarEsperando = true;
+            carro.setEstado(4);
+            carrosRevisados++;
+            return carro;
+        } else {
+            return carro;
+        }
     }
     
     public void sumaCont(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3){

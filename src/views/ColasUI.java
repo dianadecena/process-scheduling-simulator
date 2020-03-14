@@ -111,10 +111,12 @@ public class ColasUI extends javax.swing.JFrame {
                         System.out.println("entro");
                         System.out.println(cont1);
                         Carro carroAux = (Carro) simulacion.getColaNivel1().poll();
-                        nivel11.setVisible(true);
-                        elem11.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel1(carroAux);
-                        cont1--;
+                        if(carroAux != null){
+                            nivel11.setVisible(true);
+                            elem11.setText(Integer.toString(carroAux.getId()));
+                            simulacion.setColaNivel1(carroAux);
+                            cont1--;
+                        }
                         System.out.println(cont1);
                         System.out.println(simulacion.getColaNivel1().size());
                 }
@@ -122,10 +124,12 @@ public class ColasUI extends javax.swing.JFrame {
                         System.out.println("entro 2");
                         System.out.println(cont1);
                         Carro carroAux = (Carro) simulacion.getColaNivel1().poll();
-                        nivel12.setVisible(true);
-                        elem12.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel1(carroAux);
-                        cont1--;
+                        if(carroAux != null){
+                            nivel12.setVisible(true);
+                            elem12.setText(Integer.toString(carroAux.getId()));
+                            simulacion.setColaNivel1(carroAux);
+                            cont1--;
+                        }
                         System.out.println(cont1);
                         System.out.println(simulacion.getColaNivel1().size());
                 }
@@ -153,10 +157,12 @@ public class ColasUI extends javax.swing.JFrame {
                         System.out.println("entro");
                         System.out.println(cont2);
                         Carro carroAux = (Carro) simulacion.getColaNivel2().poll();
-                        nivel21.setVisible(true);
-                        elem21.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel2(carroAux);
-                        cont2--;
+                        if(carroAux != null){
+                            nivel21.setVisible(true);
+                            elem21.setText(Integer.toString(carroAux.getId()));
+                            simulacion.setColaNivel2(carroAux);
+                            cont2--;
+                        }
                         System.out.println(cont2);
                         System.out.println(simulacion.getColaNivel2().size());
                 }
@@ -164,10 +170,12 @@ public class ColasUI extends javax.swing.JFrame {
                         System.out.println("entro 2");
                         System.out.println(cont2);
                         Carro carroAux = (Carro) simulacion.getColaNivel2().poll();
-                        nivel22.setVisible(true);
-                        elem22.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel2(carroAux);
-                        cont2--;
+                        if(carroAux != null){
+                            nivel22.setVisible(true);
+                            elem22.setText(Integer.toString(carroAux.getId()));
+                            simulacion.setColaNivel2(carroAux);
+                            cont2--;
+                        }
                         System.out.println(cont2);
                         System.out.println(simulacion.getColaNivel2().size());
                 }
@@ -179,6 +187,7 @@ public class ColasUI extends javax.swing.JFrame {
                         cont2--;
                 }     
         }  
+    actualizarNivel2 = false;
     }
     
     public void encolarCarrosNivel3(){
@@ -187,10 +196,12 @@ public class ColasUI extends javax.swing.JFrame {
                         System.out.println("entro");
                         System.out.println(cont3);
                         Carro carroAux = (Carro) simulacion.getColaNivel3().poll();
-                        nivel31.setVisible(true);
-                        elem31.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel3(carroAux);
-                        cont3--;
+                        if(carroAux != null){
+                            nivel31.setVisible(true);
+                            elem31.setText(Integer.toString(carroAux.getId()));
+                            simulacion.setColaNivel3(carroAux);
+                            cont3--;
+                        }
                         System.out.println(cont3);
                         System.out.println(simulacion.getColaNivel3().size());
                 }
@@ -198,10 +209,12 @@ public class ColasUI extends javax.swing.JFrame {
                         System.out.println("entro 2");
                         System.out.println(cont3);
                         Carro carroAux = (Carro) simulacion.getColaNivel3().poll();
-                        nivel32.setVisible(true);
-                        elem32.setText(Integer.toString(carroAux.getId()));
-                        simulacion.setColaNivel3(carroAux);
-                        cont3--;
+                        if(carroAux != null){
+                            nivel32.setVisible(true);
+                            elem32.setText(Integer.toString(carroAux.getId()));
+                            simulacion.setColaNivel3(carroAux);
+                            cont3--;
+                        }
                         System.out.println(cont3);
                         System.out.println(simulacion.getColaNivel3().size());
                 }
@@ -213,6 +226,7 @@ public class ColasUI extends javax.swing.JFrame {
                         cont3--;
                 }     
         } 
+    actualizarNivel3 = false;
     }
     
     public void encolarCarrosEsperando(){

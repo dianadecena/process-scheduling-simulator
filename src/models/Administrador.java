@@ -29,72 +29,82 @@ public class Administrador {
         return carroAux;
     }
     
-        public Carro enviarCarroEspera(Queue CEspera){
-            if(!(CEspera.isEmpty())){
-                carroAux = (Carro) CEspera.poll();
-                return carroAux;}
-                    
-                return null;
+    public Carro enviarCarroEspera(Queue CEspera){
+        if(!(CEspera.isEmpty())){
+            carroAux = (Carro) CEspera.peek();
+            return carroAux;
+        }
+    return null;
     }
 
 
     public void reencolarListos(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3, Queue CEspera) throws InterruptedException {
-        if(carro.getEstado() == 1){
-        //se puede poner un print de un carro salio al mercado
-            System.out.println("Salio al mercado el carro con id: "+carro.getId());
-        }
-        if(carro.getEstado() == 2){
-            CEspera.add(carro);
-            ColasUI.actualizarEsperando = true;
-        }
-        if(carro.getEstado() == 3){
-        //necesita revision el carro
-            if (carro.getNivel() == 1){
-                nivel1.add(carro);
-                //Thread.sleep(5000);
-                ColasUI.actualizarNivel1 = true;
+        if(carro != null){
+            if(carro.getEstado() == 1){
+            //se puede poner un print de un carro salio al mercado
+                System.out.println("Salio al mercado el carro con id: "+carro.getId());
             }
-            if(carro.getNivel() == 2){
-                nivel2.add(carro);
-                ColasUI.actualizarNivel2 = true;
+            if(carro.getEstado() == 2){
+                CEspera.add(carro);
+                ColasUI.actualizarEsperando = true;
             }
-            if(carro.getNivel() == 3){
-                nivel3.add(carro);
-                ColasUI.actualizarNivel3 = true;
-            }           
-        }
-        if(carro.getEstado() == 0){
-            System.out.println("Algo malo paso");
+            if(carro.getEstado() == 3){
+            //necesita revision el carro
+                if (carro.getNivel() == 1){
+                    nivel1.add(carro);
+                    //Thread.sleep(5000);
+                    ColasUI.actualizarNivel1 = true;
+                }
+                if(carro.getNivel() == 2){
+                    nivel2.add(carro);
+                    ColasUI.actualizarNivel2 = true;
+                }
+                if(carro.getNivel() == 3){
+                    nivel3.add(carro);
+                    ColasUI.actualizarNivel3 = true;
+                }           
+            }
+            if(carro.getEstado() == 0){
+                System.out.println("Algo malo paso");
+            }
         }
     }
 
 
     public void reencolarEspera(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3, Queue CEspera){
-    
-    if (carro.getEstado() ==4 ){
-        if(carro.getNivel() == 1){
-        nivel1.add(CEspera.poll());         
-        }
-        if(carro.getNivel() == 2){
-        nivel2.add(CEspera.poll());         
-        }
-        if(carro.getNivel() == 3){
-        nivel3.add(CEspera.poll());         
-        }
-    }
-    else {
+        if(carro != null){
+            if(carro.getEstado() == 4){
+              System.out.println("Vuelve a su cola el carro de id: "+carro.getId());
+                if(carro.getNivel() == 1){
+                  nivel1.add(CEspera.poll()); 
+                  System.out.println("El tamano de la cola es: "+nivel1.size());
+                  ColasUI.actualizarNivel1 = true;
+                }
+                if(carro.getNivel() == 2){
+                   nivel2.add(CEspera.poll()); 
+                   System.out.println(nivel2.size());
+                   ColasUI.actualizarNivel2 = true;
+                }
+                if(carro.getNivel() == 3){
+                   nivel3.add(CEspera.poll());  
+                   System.out.println(nivel3.size());
+                   ColasUI.actualizarNivel3 = true;
+                }
+        } else {
         System.out.println("sigues esperando chamito :(");
-    }
-    
+        }
+        }
     }
 
 
-    public void crearCarro(){
+    public Carro crearCarro(){
       if(Mecanico.carrosRevisados == 2){
         carroAux = new Carro();
         Mecanico.carrosRevisados = 0;
         System.out.println("El admin creo un carro");
+        return carroAux;
       }
+    return null;
     }
 
 }

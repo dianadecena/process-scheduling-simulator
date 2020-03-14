@@ -6,6 +6,7 @@ import models.Carro;
 import models.Mecanico;
 import java.util.LinkedList; 
 import java.util.Queue; 
+import views.ColasUI;
 
 /**
      * PROYECTO 2 
@@ -97,15 +98,18 @@ public class Simulacion {
     public void agregarCarroACola(Carro carro){
         if(carro.getNivel() == 1){
             System.out.println("CARROS NIVEL 1: " +carro.getId());
-            setColaNivel1(carro);
+            nivel1.add(carro);
+            ColasUI.actualizarNivel1 = true;
         }
         if(carro.getNivel() == 2){
             System.out.println("CARROS NIVEL 2: " +carro.getId());
-            setColaNivel2(carro);
+            nivel2.add(carro);
+            ColasUI.actualizarNivel2 = true;
         } 
         if(carro.getNivel() == 3){
             System.out.println("CARROS NIVEL 3: " +carro.getId());
-            setColaNivel3(carro);
+            nivel3.add(carro);
+            ColasUI.actualizarNivel3 = true;
         }
     }
 
@@ -135,16 +139,14 @@ public class Simulacion {
     public void iniciarSimulacion() throws InterruptedException{
         Thread.sleep(5000);
         admin.reencolarListos(mecanico.revisarCarro(admin.enviarCarroListo(nivel1, nivel2, nivel3), nivel1,nivel2,nivel3), nivel1,nivel2,nivel3,carrosEsperando);
-        
-        
-       /* if(!(carrosEsperando.isEmpty())) {
+
+        if(!(carrosEsperando.isEmpty())) {
             Thread.sleep(1000);
             admin.reencolarEspera(mecanico.sacarCarroEspera(admin.enviarCarroEspera(carrosEsperando)), nivel1, nivel2, nivel3, nivel1);
         }
-       if(Mecanico.carrosRevisados == 2){
-           Thread.sleep(2000);
-           admin.crearCarro();
-       }*/
+        if(Mecanico.carrosRevisados == 2){
+           this.agregarCarroACola(admin.crearCarro());
+       }
     }
     
 }
