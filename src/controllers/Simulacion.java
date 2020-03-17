@@ -4,6 +4,7 @@ package controllers;
 import models.Administrador;
 import models.Carro;
 import models.Mecanico;
+import views.ColasUI;
 
 /**
      * PROYECTO 2 
@@ -13,8 +14,8 @@ import models.Mecanico;
 
 public class Simulacion {
     private Mecanico mecanico;
-    public Carro carro1, carro2, carro3, carro4, carro5, carro6;
-    private Administrador admin;
+    public Carro carro;
+    public Administrador admin;
     public static int id = 1;
     
     public Simulacion(){
@@ -24,12 +25,8 @@ public class Simulacion {
     public void inicializar(){
         admin = new Administrador();
         mecanico = new Mecanico();
-        carro1 = new Carro();
-        carro2 = new Carro();
-        carro3 = new Carro(); 
-        admin.agregarCarroACola(carro1);
-        admin.agregarCarroACola(carro2);
-        admin.agregarCarroACola(carro3);
+        carro = new Carro();
+        admin.agregarCarroACola(carro);
     }
     
     public int getId() {
@@ -45,15 +42,31 @@ public class Simulacion {
     }
     
     public void iniciarSimulacion() throws InterruptedException{
+        //RevisarSiCrearCarro();
+        System.out.println("Durmiendo");
         Thread.sleep(5000);
         admin.reencolarListos(mecanico.revisarCarro(admin.enviarCarroListo(), admin.getNivel1(), admin.getNivel2(), admin.getNivel3()));
+        
+        //RevisarSiCrearCarro();
 
-        if(!(admin.getCarrosEsperando().isEmpty())) {
+        /*if(!(admin.getCarrosEsperando().isEmpty())) {
+            //Thread.sleep(2500);  
             admin.reencolarEspera(mecanico.sacarCarroEspera(admin.enviarCarroEspera()));
-        }
-        if(Mecanico.carrosRevisados == 2){
-           admin.agregarCarroACola(admin.crearCarro());
-       }
+        }*/
     }
     
+    public void RevisarSiCrearCarro() throws InterruptedException{
+        if(Mecanico.carrosRevisados%2 == 0 && Mecanico.carrosRevisados !=0){
+            Thread.sleep(2000);
+            admin.agregarCarroACola(admin.crearCarro());
+        }
+    }
+    
+    public void sacarCarroEsperando() throws InterruptedException{
+        if(!(admin.getCarrosEsperando().isEmpty())) {
+            Thread.sleep(2000);  
+            admin.reencolarEspera(mecanico.sacarCarroEspera(admin.enviarCarroEspera()));
+            //Thread.sleep(2500); 
+        }
+    }
 }

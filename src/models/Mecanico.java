@@ -6,87 +6,108 @@ import views.ColasUI;
 
 public class Mecanico {
     private int random;
-    private boolean revisando;
-    public static int carrosRevisados = 0;
+    public static int carrosRevisados = 0; 
 
     public Mecanico() {
     }
     
-    
     public Carro revisarCarro(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3) throws InterruptedException{
         if(carro != null){
-            System.out.println("entro carro");
-            random = (int)(Math.random()*(10-1+1)+1);
-            sumaCont(carro, nivel1, nivel2, nivel3);
+            //entra un carro y el mecánico lo revisa 
+            
+            //se crea un número random entre 1 y 10 
+            random = (int)(Math.random()*(10-1+1)+1); 
+            
+            //se le suma uno al contador de los carros que siguen en las colas
+            sumaCont(nivel1, nivel2, nivel3);
+            
+            //se pone el contador en cero del carro que se está revisando
             carro.setCont(0);
+            
                 if(random <= 3){
+                    //tiene un probabilidad del 30% de salir al mercado (si el random es igual a 1, 2 o 3)
                     System.out.println("Está botado el carro de id " +carro.getId());
                     carrosRevisados++;
+                    //se cambia el estado del carro a 1 lo que significa que saldrá al mercado 
                     carro.setEstado(1);
                     return carro;
                 }
                 if(random > 3 && random <= 5){
+                    //tiene probabilidad del 20% de requerir alguna mejora es igual a 4 o 5 
                     System.out.println("Le toca esperar al carro de id " +carro.getId());
                     carrosRevisados++;
+                    //se cambia el estado del carro a 2 lo que significa que va a la cola de esperando 
                     carro.setEstado(2);
                     return carro;
                 }
                 if(random > 5){
+                    //tiene probabilidad del 50% de volver a encolarse porque necesita más tiempo de revisión (si el random es igual a 6, 7, 8, 9 o 10 
                     System.out.println("Vuelve a la cola el carro de id " +carro.getId());
                     carrosRevisados++;
+                    //se cambia el estado del carro a 3 lo que significa que se vuelve a encolar en la cola de su nivel
                     carro.setEstado(3);
                     return carro;
                 }
         }
+    System.out.println("No se reviso ningún carro");
+    carrosRevisados++;
     return null;
     }
     
+    //función para ver si sale un carro que está en la cola de esperando 
     public Carro sacarCarroEspera(Carro carro){
+        //se genera un número random entre 1 y 10
         random = (int)(Math.random()*(10-1+1)+1);
     
+        //tiene 60% de probabilidades de salir de la cola (si random es 1, 2, 3, 4, 5 o 6
         if(random <=6){
             ColasUI.actualizarEsperando = true;
+            //se cambia el estado del carro a 4 que significa que saldrá de la cola de esperando 
             carro.setEstado(4);
             carrosRevisados++;
             return carro;
-        } else {
-            return null;
-        }
+        } 
+        return null;
     }
     
-    public void sumaCont(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3){
+    public void sumaCont(Queue nivel1, Queue nivel2, Queue nivel3) throws InterruptedException{
+        //Thread.sleep(2500);
         Carro carroAux;
         if(!(nivel1.isEmpty())){
             for(int i=1; i<=nivel1.size(); i++){
-                
                 carroAux = (Carro) nivel1.poll();
                 carroAux.setCont(carroAux.getCont()+1);
                 nivel1.add(carroAux);
-                }
-    }
+            }
+        }
         if(!(nivel2.isEmpty())){
             for(int i=1; i<=nivel2.size(); i++){
                 carroAux = (Carro) nivel2.poll();
                 carroAux.setCont(carroAux.getCont()+1);
-                if(carroAux.getCont()==10){
-                nivel1.add(carroAux);
-                carroAux.setNivel(1);
-                }
-                else{nivel2.add(carroAux);}
-                }
-    }
+                    if(carroAux.getCont()==10){
+                        System.out.println("Subio del nivel el carro de id: " +carroAux.getId());
+                        ColasUI.actualizarNivel2 = true;
+                        nivel1.add(carroAux);
+                        carroAux.setNivel(1);
+                        ColasUI.actualizarNivel1 = true;
+                    }
+                    else{nivel2.add(carroAux);}
+            }
+        }
         if(!(nivel3.isEmpty())){
             for(int i=1; i<=nivel3.size(); i++){
                 carroAux = (Carro) nivel3.poll();
                 carroAux.setCont(carroAux.getCont()+1);
-                if(carroAux.getCont()==10){
-                    nivel2.add(carroAux);
-                    carroAux.setNivel(2);
-                }
+                    if(carroAux.getCont()==10){
+                        System.out.println("Subio del nivel el carro de id: " +carroAux.getId());
+                        ColasUI.actualizarNivel3 = true;
+                        nivel2.add(carroAux);
+                        carroAux.setNivel(2);
+                        ColasUI.actualizarNivel2 = true;
+                    }
                     else{nivel3.add(carroAux);}
-                }
-                
-                
+            }           
+        }
     }
-}
+    
 }

@@ -13,17 +13,15 @@
             <url>src/views/ColasUI.java</url>
             <bookmark id="2">
                 <name/>
-                <line>66</line>
+                <line>85</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ramon%20Decena/Desktop/PROJECTS/ProcessSchedulingSimulation/src/controllers/Simulacion.java</file>
-            <file>file:/C:/Users/Ramon%20Decena/Desktop/PROJECTS/ProcessSchedulingSimulation/src/models/Carro.java</file>
-            <file>file:/C:/Users/Ramon%20Decena/Desktop/PROJECTS/ProcessSchedulingSimulation/src/models/Mecanico.java</file>
             <file>file:/C:/Users/Ramon%20Decena/Desktop/PROJECTS/ProcessSchedulingSimulation/src/views/ColasUI.java</file>
+            <file>file:/C:/Users/Ramon%20Decena/Desktop/PROJECTS/ProcessSchedulingSimulation/src/models/Mecanico.java</file>
             <file>file:/C:/Users/Ramon%20Decena/Desktop/PROJECTS/ProcessSchedulingSimulation/src/models/Administrador.java</file>
         </group>
     </open-files>
