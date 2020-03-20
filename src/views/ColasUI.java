@@ -83,6 +83,12 @@ public class ColasUI extends javax.swing.JFrame {
         e10.setVisible(false);
         e11.setVisible(false);
 
+        cont1 = simulacion.getAdmin().getNivel1().size();
+        this.encolarCarrosNivel1();
+        cont2 = simulacion.getAdmin().getNivel2().size();
+        this.encolarCarrosNivel2();
+        cont3 = simulacion.getAdmin().getNivel3().size();
+        this.encolarCarrosNivel3();
             
         Timer timer = new Timer(1, (ActionEvent ae) -> { 
             try {
@@ -601,12 +607,19 @@ public class ColasUI extends javax.swing.JFrame {
         e3 = new javax.swing.JLabel();
         elem44 = new javax.swing.JLabel();
         e4 = new javax.swing.JLabel();
+        elem45 = new javax.swing.JLabel();
         e5 = new javax.swing.JLabel();
+        elem46 = new javax.swing.JLabel();
         e6 = new javax.swing.JLabel();
+        elem47 = new javax.swing.JLabel();
         e7 = new javax.swing.JLabel();
+        elem48 = new javax.swing.JLabel();
         e8 = new javax.swing.JLabel();
+        elem49 = new javax.swing.JLabel();
         e9 = new javax.swing.JLabel();
+        elem410 = new javax.swing.JLabel();
         e10 = new javax.swing.JLabel();
+        elem411 = new javax.swing.JLabel();
         e11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -938,24 +951,54 @@ public class ColasUI extends javax.swing.JFrame {
         e4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         getContentPane().add(e4, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 510, -1, -1));
 
+        elem45.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem45.setForeground(new java.awt.Color(0, 0, 0));
+        elem45.setToolTipText("");
+        getContentPane().add(elem45, new org.netbeans.lib.awtextra.AbsoluteConstraints(432, 538, -1, -1));
+
         e5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         getContentPane().add(e5, new org.netbeans.lib.awtextra.AbsoluteConstraints(404, 510, -1, -1));
+
+        elem46.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem46.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(elem46, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 538, -1, -1));
 
         e6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         getContentPane().add(e6, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 510, -1, -1));
 
+        elem47.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem47.setForeground(new java.awt.Color(0, 0, 0));
+        elem47.setToolTipText("");
+        getContentPane().add(elem47, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 538, -1, -1));
+
         e7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         getContentPane().add(e7, new org.netbeans.lib.awtextra.AbsoluteConstraints(314, 510, -1, -1));
+
+        elem48.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem48.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(elem48, new org.netbeans.lib.awtextra.AbsoluteConstraints(296, 538, 20, -1));
 
         e8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         e8.setToolTipText("");
         getContentPane().add(e8, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 510, -1, -1));
 
+        elem49.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem49.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(elem49, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 538, -1, -1));
+
         e9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         getContentPane().add(e9, new org.netbeans.lib.awtextra.AbsoluteConstraints(224, 510, -1, -1));
 
+        elem410.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem410.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(elem410, new org.netbeans.lib.awtextra.AbsoluteConstraints(208, 538, -1, -1));
+
         e10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         getContentPane().add(e10, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, -1, -1));
+
+        elem411.setFont(new java.awt.Font("Consolas", 1, 24)); // NOI18N
+        elem411.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(elem411, new org.netbeans.lib.awtextra.AbsoluteConstraints(162, 538, -1, -1));
 
         e11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/esperando.png"))); // NOI18N
         e11.setToolTipText("");
@@ -1056,9 +1099,16 @@ public class ColasUI extends javax.swing.JFrame {
     private javax.swing.JLabel elem38;
     private javax.swing.JLabel elem39;
     private javax.swing.JLabel elem41;
+    private javax.swing.JLabel elem410;
+    private javax.swing.JLabel elem411;
     private javax.swing.JLabel elem42;
     private javax.swing.JLabel elem43;
     private javax.swing.JLabel elem44;
+    private javax.swing.JLabel elem45;
+    private javax.swing.JLabel elem46;
+    private javax.swing.JLabel elem47;
+    private javax.swing.JLabel elem48;
+    private javax.swing.JLabel elem49;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel nivel11;
     private javax.swing.JLabel nivel110;

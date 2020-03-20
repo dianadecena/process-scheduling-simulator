@@ -16,10 +16,14 @@ public class Mecanico {
             //entra un carro y el mecánico lo revisa 
             ColasUI.ID.setText(Integer.toString(carro.getId()));
             
+            //se tarda 5 segundos revisando un carro
+            Thread.sleep(5000);
+            
             //se crea un número random entre 1 y 10 
             random = (int)(Math.random()*(10-1+1)+1); 
             
             //se le suma uno al contador de los carros que siguen en las colas
+            //al hacer poll a la cola el carro en revisión ya no se encuentra en su cola de nivel 
             sumaCont(nivel1, nivel2, nivel3);
             
             //se pone el contador en cero del carro que se está revisando
@@ -71,11 +75,11 @@ public class Mecanico {
     }
     
     public void sumaCont(Queue nivel1, Queue nivel2, Queue nivel3) throws InterruptedException{
-        //Thread.sleep(2500);
         Carro carroAux;
         if(!(nivel1.isEmpty())){
             for(int i=1; i<=nivel1.size(); i++){
                 carroAux = (Carro) nivel1.poll();
+                //se le suma uno al contador del carro
                 carroAux.setCont(carroAux.getCont()+1);
                 nivel1.add(carroAux);
             }
@@ -83,9 +87,12 @@ public class Mecanico {
         if(!(nivel2.isEmpty())){
             for(int i=1; i<=nivel2.size(); i++){
                 carroAux = (Carro) nivel2.poll();
+                //se le suma uno al contador del carro
                 carroAux.setCont(carroAux.getCont()+1);
+                    //si el contador es igual a 10 sube al nivel 1
                     if(carroAux.getCont()==10){
                         System.out.println("Subio del nivel el carro de id: " +carroAux.getId());
+                        carroAux.setCont(0);
                         ColasUI.actualizarNivel2 = true;
                         nivel1.add(carroAux);
                         carroAux.setNivel(1);
@@ -97,9 +104,12 @@ public class Mecanico {
         if(!(nivel3.isEmpty())){
             for(int i=1; i<=nivel3.size(); i++){
                 carroAux = (Carro) nivel3.poll();
+                //se le suma uno al contador del carro
                 carroAux.setCont(carroAux.getCont()+1);
+                    //si el contador es igual a 10 sube al nivel 2
                     if(carroAux.getCont()==10){
                         System.out.println("Subio del nivel el carro de id: " +carroAux.getId());
+                        carroAux.setCont(0);
                         ColasUI.actualizarNivel3 = true;
                         nivel2.add(carroAux);
                         carroAux.setNivel(2);

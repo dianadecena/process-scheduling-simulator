@@ -44,7 +44,6 @@ public class Simulacion {
     }
     
     public void iniciarSimulacion() throws InterruptedException{
-        Thread.sleep(5000);
         //se envia un carro al mecánico para que lo revise
         admin.reencolarListos(mecanico.revisarCarro(admin.enviarCarroListo(), admin.getNivel1(), admin.getNivel2(), admin.getNivel3()));
         
