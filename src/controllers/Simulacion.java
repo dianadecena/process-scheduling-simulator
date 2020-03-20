@@ -48,11 +48,11 @@ public class Simulacion {
         //se envia un carro al mecánico para que lo revise
         admin.reencolarListos(mecanico.revisarCarro(admin.enviarCarroListo(), admin.getNivel1(), admin.getNivel2(), admin.getNivel3()));
         
-        //se verifica si se debe sacar un carro de la cola de esperando 
-        sacarCarroEsperando();
-        
         //se revisar si pasaron dos ciclos para crear un carro 
         RevisarSiCrearCarro();
+        
+        //se verifica si se debe sacar un carro de la cola de esperando 
+        sacarCarroEsperando();
     }
     
     public void RevisarSiCrearCarro() throws InterruptedException{
