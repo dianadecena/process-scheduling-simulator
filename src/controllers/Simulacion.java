@@ -25,7 +25,9 @@ public class Simulacion {
     public void inicializar(){
         admin = new Administrador();
         mecanico = new Mecanico();
+        //se crea el carro inicial del sistema 
         carro = new Carro();
+        //se agregar el carro a la cola de su nivel correspondiente 
         admin.agregarCarroACola(carro);
     }
     
@@ -34,7 +36,7 @@ public class Simulacion {
     }
 
     public void setId(int id) {
-        this.id = id;
+        Simulacion.id = id;
     }
 
     public Administrador getAdmin() {
@@ -42,22 +44,21 @@ public class Simulacion {
     }
     
     public void iniciarSimulacion() throws InterruptedException{
-        //RevisarSiCrearCarro();
-        System.out.println("Durmiendo");
         Thread.sleep(5000);
+        //se envia un carro al mecánico para que lo revise
         admin.reencolarListos(mecanico.revisarCarro(admin.enviarCarroListo(), admin.getNivel1(), admin.getNivel2(), admin.getNivel3()));
         
-        //RevisarSiCrearCarro();
-
-        /*if(!(admin.getCarrosEsperando().isEmpty())) {
-            //Thread.sleep(2500);  
-            admin.reencolarEspera(mecanico.sacarCarroEspera(admin.enviarCarroEspera()));
-        }*/
+        //se revisar si pasaron dos ciclos para crear un carro 
+        RevisarSiCrearCarro();
+        
+        //se verifica si se debe sacar un carro de la cola de esperando 
+        sacarCarroEsperando();
     }
     
     public void RevisarSiCrearCarro() throws InterruptedException{
         if(Mecanico.carrosRevisados%2 == 0 && Mecanico.carrosRevisados !=0){
             Thread.sleep(2000);
+            //el admin crea un carro y lo agrega a la cola de su nivel 
             admin.agregarCarroACola(admin.crearCarro());
         }
     }
@@ -65,8 +66,8 @@ public class Simulacion {
     public void sacarCarroEsperando() throws InterruptedException{
         if(!(admin.getCarrosEsperando().isEmpty())) {
             Thread.sleep(2000);  
+            //se verifica si saldrá un carro de la cola de esperando 
             admin.reencolarEspera(mecanico.sacarCarroEspera(admin.enviarCarroEspera()));
-            //Thread.sleep(2500); 
         }
     }
 }

@@ -14,6 +14,7 @@ public class Mecanico {
     public Carro revisarCarro(Carro carro, Queue nivel1, Queue nivel2, Queue nivel3) throws InterruptedException{
         if(carro != null){
             //entra un carro y el mecánico lo revisa 
+            ColasUI.ID.setText(Integer.toString(carro.getId()));
             
             //se crea un número random entre 1 y 10 
             random = (int)(Math.random()*(10-1+1)+1); 
@@ -64,7 +65,6 @@ public class Mecanico {
             ColasUI.actualizarEsperando = true;
             //se cambia el estado del carro a 4 que significa que saldrá de la cola de esperando 
             carro.setEstado(4);
-            carrosRevisados++;
             return carro;
         } 
         return null;

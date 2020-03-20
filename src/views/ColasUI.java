@@ -83,29 +83,16 @@ public class ColasUI extends javax.swing.JFrame {
         e10.setVisible(false);
         e11.setVisible(false);
 
-        
-        //contadores iniciales de cada nivel 
-        cont1 = simulacion.getAdmin().getNivel1().size();
-        cont2 = simulacion.getAdmin().getNivel2().size();
-        cont3 = simulacion.getAdmin().getNivel3().size();
-        cont4 = simulacion.getAdmin().getCarrosEsperando().size();
-        
-        this.encolarCarrosNivel1();
-        this.encolarCarrosNivel2();
-        this.encolarCarrosNivel3();
             
         Timer timer = new Timer(1, (ActionEvent ae) -> { 
-             try {
+            try {
                 simulacion.iniciarSimulacion();
-                simulacion.RevisarSiCrearCarro();
-                simulacion.sacarCarroEsperando();
             } catch (InterruptedException ex) {
                 Logger.getLogger(ColasUI.class.getName()).log(Level.SEVERE, null, ex);
             }
              
-            ID.setText(Integer.toString(idRevision));
             if(actualizarNivel1){
-                //System.out.println("actualizando nivel 1");
+                //obtener el tamano de la cola 
                 cont1 = simulacion.getAdmin().getNivel1().size();
                 nivel11.setVisible(false);
                 nivel12.setVisible(false);
@@ -120,10 +107,11 @@ public class ColasUI extends javax.swing.JFrame {
                 nivel111.setVisible(false);
                 nivel112.setVisible(false);
                 nivel113.setVisible(false);
+                //actualizar cola de nivel 1
                 this.encolarCarrosNivel1();
             }
             if(actualizarNivel2){
-                //System.out.println("actualizando nivel 2");
+                //obtener el tamano de la cola
                 cont2 = simulacion.getAdmin().getNivel2().size();
                 nivel21.setVisible(false);
                 nivel22.setVisible(false);
@@ -138,10 +126,11 @@ public class ColasUI extends javax.swing.JFrame {
                 nivel211.setVisible(false);
                 nivel212.setVisible(false);
                 nivel213.setVisible(false);
+                //actualizar cola de nivel 2
                 this.encolarCarrosNivel2();
             }
             if(actualizarNivel3){
-                //System.out.println("actualizando nivel 3");
+                //obtener el tamano de la cola
                 cont3 = simulacion.getAdmin().getNivel3().size();
                 nivel31.setVisible(false);
                 nivel32.setVisible(false);
@@ -156,28 +145,29 @@ public class ColasUI extends javax.swing.JFrame {
                 nivel311.setVisible(false);
                 nivel312.setVisible(false);
                 nivel313.setVisible(false);
+                //actualizar cola de nivel 3
                 this.encolarCarrosNivel3();
             }
             if(actualizarEsperando){
+                //obtener el tamano de la cola
                 cont4 = simulacion.getAdmin().getCarrosEsperando().size();
                 e2.setVisible(false);
                 e1.setVisible(false);
                 e3.setVisible(false);
                 e4.setVisible(false);
+                e5.setVisible(false);
+                e6.setVisible(false);
+                e7.setVisible(false);
+                e8.setVisible(false);
+                e9.setVisible(false);
+                e10.setVisible(false);
+                e11.setVisible(false);
+                //actualizar cola de carros esperando
                 this.encolarCarrosEsperando();
             }
         });
         
-        /*Timer timer2 = new Timer(1, (ActionEvent ae) -> { 
-            try {
-                simulacion.iniciarSimulacion();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(ColasUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });*/
-        
         timer.start();
-        //timer2.start();
     }
     
     public void encolarCarrosNivel1(){
@@ -1014,7 +1004,7 @@ public class ColasUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ID;
+    public static javax.swing.JLabel ID;
     private javax.swing.JLabel e1;
     private javax.swing.JLabel e10;
     private javax.swing.JLabel e11;
