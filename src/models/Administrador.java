@@ -91,7 +91,6 @@ public class Administrador {
                 //se agrega en la cola de esperando 
                 carrosEsperando.add(carro);
                 ColasUI.actualizarEsperando = true;
-                Thread.sleep(2000);
             }
             //si el estado del carro es igual a 3 se vuelve a encolar en la cola de su nivel 
             if(carro.getEstado() == 3){
